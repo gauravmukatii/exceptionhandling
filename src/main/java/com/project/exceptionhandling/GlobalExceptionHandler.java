@@ -58,4 +58,10 @@ public class GlobalExceptionHandler {
         ErrorResponse errorResponse = new ErrorResponse(HttpStatus.SERVICE_UNAVAILABLE, ex.getMessage());
         return new ResponseEntity<>(errorResponse,HttpStatus.SERVICE_UNAVAILABLE);
     }
+
+    @ExceptionHandler(TimeoutException.class)
+    public ResponseEntity<Object> handleTimeoutException(TimeoutException ex){
+        ErrorResponse errorResponse = new ErrorResponse(HttpStatus.GATEWAY_TIMEOUT, ex.getMessage());
+        return new ResponseEntity<>(errorResponse, HttpStatus.GATEWAY_TIMEOUT);
+    }
 }
