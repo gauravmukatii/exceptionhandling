@@ -1,9 +1,6 @@
 package com.project.exceptionhandling;
 
-import com.project.exceptionhandling.exceptionHandling.BadRequestException;
-import com.project.exceptionhandling.exceptionHandling.ForbiddenException;
-import com.project.exceptionhandling.exceptionHandling.ResourceNotFoundException;
-import com.project.exceptionhandling.exceptionHandling.UnauthorizedException;
+import com.project.exceptionhandling.exceptionHandling.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -36,5 +33,11 @@ public class GlobalExceptionHandler {
     public ResponseEntity<Object> handleForbiddenException(ForbiddenException ex){
         ErrorResponse errorResponse = new ErrorResponse(HttpStatus.FORBIDDEN, ex.getMessage());
         return new ResponseEntity<>(errorResponse, HttpStatus.FORBIDDEN);
+    }
+
+    @ExceptionHandler(ValidationException.class)
+    public ResponseEntity<Object> handleValidationException(ValidationException ex){
+        ErrorResponse errorResponse = new ErrorResponse(HttpStatus.BAD_REQUEST, ex.getMessage());
+        return new ResponseEntity<>(errorResponse, HttpStatus.BAD_REQUEST);
     }
 }
