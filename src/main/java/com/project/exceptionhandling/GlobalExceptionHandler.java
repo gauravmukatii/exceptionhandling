@@ -46,4 +46,10 @@ public class GlobalExceptionHandler {
         ErrorResponse errorResponse = new ErrorResponse(HttpStatus.CONFLICT, ex.getMessage());
         return new ResponseEntity<>(HttpStatus.CONFLICT);
     }
+
+    @ExceptionHandler(InternalServerErrorException.class)
+    public ResponseEntity<Object> handleInternalServerErrorException(InternalServerErrorException ex){
+        ErrorResponse errorResponse = new ErrorResponse(HttpStatus.INTERNAL_SERVER_ERROR, ex.getMessage());
+        return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+    }
 }
